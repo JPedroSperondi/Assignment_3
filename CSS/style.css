@@ -1,0 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #gifContainer img {
+    margin: 10px;
+    max-height: 200px;
+    border-radius: 8px;
+  }
