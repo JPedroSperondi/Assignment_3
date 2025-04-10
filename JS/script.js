@@ -29,3 +29,6 @@ async function getAdvice() {
   }
 
   getAdvice();
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
