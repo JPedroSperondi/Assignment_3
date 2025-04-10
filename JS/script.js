@@ -44,8 +44,18 @@ function displayGIFs(gifs) {
   const gifContainer = document.getElementById("gifContainer");
   gifContainer.innerHTML = "";
   gifs.forEach(gif => {
-    const img = document.createElement("img");
-    img.src = gif.images.fixed_height.url;
-    gifContainer.appendChild(img);
+  const div = document.createElement("div");
+  const img = document.createElement("img");
+  img.src = gif.images.fixed_height.url;
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = gif.images.original.url;
+  downloadLink.download = "giphy.gif";
+  downloadLink.textContent = "Download";
+  downloadLink.target = "_blank";
+
+  div.appendChild(img);
+  div.appendChild(downloadLink);
+  gifContainer.appendChild(div);
   });
 }
