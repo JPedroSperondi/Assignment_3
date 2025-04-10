@@ -9,3 +9,12 @@ body {
     max-height: 200px;
     border-radius: 8px;
   }
+  .dark-mode {
+    background-color: #111;
+    color: #fff;
+  }
+  .dark-mode input, .dark-mode button {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+  }
