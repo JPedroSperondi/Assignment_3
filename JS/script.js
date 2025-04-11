@@ -59,3 +59,18 @@ function displayGIFs(gifs) {
   gifContainer.appendChild(div);
   });
 }
+
+//function to store new search history
+function saveHistory(newHistory){
+  //get search histories stored in local storage. If it's empty, set history as an empty list.
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  //if search history list doesn't contain new entry, append the list and slice from index 0 to 5. 
+  if(!history.includes(newHistory)){
+    history.unshift(newHistory);
+    history = history.slice(0, 5);
+    //store the new search history list to local storage.
+    localStorage.setItem("searchHistory", JSON.stringify(history));
+  }
+  //display new search history
+  displayHistory();
+}
