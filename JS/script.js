@@ -42,35 +42,50 @@ async function getAdvice() {
     document.getElementById("adviceText").textContent = `"${data.slip.advice}"`;
   }
 
-  //get 
+  //call getAdvice
   getAdvice();
+  //toggle function
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
   }
-
+  //function to display trending GIFs when the window is loaded.
   window.onload = async function () {
   const url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=10&rating=g`;
   const response = await fetch(url);
   const result = await response.json();
+  //call displayGIFs
   displayGIFs(result.data);
 };
 
+//function to display GIFs
 function displayGIFs(gifs) {
+  //get GIFs container element
   const gifContainer = document.getElementById("gifContainer");
+  //set the container inner html as null.
   gifContainer.innerHTML = "";
+  //create div and img elements for each GIF
   gifs.forEach(gif => {
   const div = document.createElement("div");
   const img = document.createElement("img");
+  //set created img with gif img 
   img.src = gif.images.fixed_height.url;
-
+  
+  //create download link element
   const downloadLink = document.createElement("a");
+  //set link with gif url
   downloadLink.href = gif.images.original.url;
+  //set anchor element's download attribute(This is going to be the file name after download)
   downloadLink.download = "giphy.gif";
+  //set link text
   downloadLink.textContent = "Download";
+  //set the target with blank
   downloadLink.target = "_blank";
-
+  
+  //append gif div with img
   div.appendChild(img);
+  //append gif div with download link
   div.appendChild(downloadLink);
+  //append gif container with created div
   gifContainer.appendChild(div);
   });
 }
