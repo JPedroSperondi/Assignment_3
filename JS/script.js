@@ -74,3 +74,26 @@ function saveHistory(newHistory){
   //display new search history
   displayHistory();
 }
+
+function displayHistory(){
+  //get search histories stored in local storage. If it's empty, set history as an empty list.
+  const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  //get history container element
+  const historyContainer = document.getElementById("historyContainer");
+  //set history container innerHTML as null.
+  historyContainer.innerHTML = "";
+  //create new buttons of each search history
+  history.forEach(item => {
+    //create new button
+    const button = document.createElement("button");
+    //set button text as a history name.
+    button.textContent = item;
+    //function to search gif by history name when the button is clicked.
+    button.onclick = () => {
+      document.getElementById("searchInput").value = item;
+      searchGIF();
+    };
+    //append history container.
+    historyContainer.appendChild(button);
+  });
+}
