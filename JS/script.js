@@ -17,6 +17,8 @@ async function searchGIF() {
       img.src = gif.images.fixed_height.url;
       gifContainer.appendChild(img);
     });
+    //save search word into history.
+    saveHistory(query);
   } catch (error) {
     console.error("Failed to fetch GIFs:", error);
   }
