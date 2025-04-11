@@ -1,9 +1,17 @@
+//set api key
 const apiKey = "aWLvikLl3S4vpRzaOj833VdFbE3jRTZS";
-
+//function to search GIFs
 async function searchGIF() {
+  //get user's search input value
   const query = document.getElementById("searchInput").value;
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=10&rating=g`;
+  //get number of GIFs displayed
+  const limit = document.getElementById("limit").value;
+  //get rating of GIFs displayed
+  const rating = document.getElementById("rating").value;
+  //get api url
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=${limit}&rating=${rating}`;
 
+  //get data
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -11,25 +19,30 @@ async function searchGIF() {
 
     const gifContainer = document.getElementById("gifContainer");
     gifContainer.innerHTML = "";
-
+    //create img element for each GIF obtained from data.
     gifs.forEach(gif => {
       const img = document.createElement("img");
       img.src = gif.images.fixed_height.url;
+      //append gif container with img
       gifContainer.appendChild(img);
     });
     //save search word into history.
     saveHistory(query);
+  //display an error message on console when the fetch is failed.
   } catch (error) {
     console.error("Failed to fetch GIFs:", error);
   }
 }
-
+//function to get advice.(doesn't need api key)
 async function getAdvice() {
     const response = await fetch("https://api.adviceslip.com/advice");
+    //get data
     const data = await response.json();
+    //set the obtained data to adviceText content.
     document.getElementById("adviceText").textContent = `"${data.slip.advice}"`;
   }
 
+  //get 
   getAdvice();
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
